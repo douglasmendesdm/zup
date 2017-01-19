@@ -1,0 +1,16 @@
+<persistence version="2.0"
+         xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+<persistence-unit name="zupPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.hibernate.ogm.jpa.HibernateOgmPersistence</provider>
+
+    <class>com.zup.app.entity.Product</class>
+    
+    <properties>
+        <property name="hibernate.ogm.datastore.provider" value="mongodb" />
+	    <property name="hibernate.ogm.datastore.database" value="zupdb" />
+	    <property name="hibernate.ogm.datastore.host" value="127.0.0.1" />
+	    <property name="hibernate.ogm.datastore.create_database" value="true" />
+    </properties>
+</persistence-unit>
+</persistence>
