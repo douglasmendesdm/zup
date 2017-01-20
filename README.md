@@ -1,7 +1,7 @@
 # Douglas Mende ZUP
 
 Cadastro de Produtos Java - 
-Para executar o programa é preciso da instalação do MongoDB, é preciso também do maven para fazer o build do projeto, o servidor usado é jetty!
+Para executar o programa é preciso ter instalado o MongoDB, é preciso também do maven para fazer o build do projeto, o servidor usado é jetty!
 
 ### Instalação
 
@@ -13,16 +13,14 @@ Para executar o programa é preciso da instalação do MongoDB, é preciso tamb�
 
 ```shell
 git clone https://github.com/douglasmendesdm/zup.git
-meteor
 ```
 
 <a name="deploy"></a>
 ## Deploy
 
 ```shell
-cd alunuz
-Após baixar o projeto, abrir a pasta onde está o arquivo e fazer o build usando o maven ({diretorio_maven}/mvn install).
+Após baixar o projeto, abrir a pasta onde está o arquivo e fazer o build usando o <br /> maven ({diretorio_maven}/mvn install).
 Em seguida iniciar o mongoDB
-O último passo é voltar a pasta zup_parente e excutar o seguinte comando maven ({{diretorio_maven}/mvn jetty:run}), isso vai subir a aplicação usando o jetty
+O último passo é voltar a pasta zup_parente e excutar o seguinte comando maven <br /> ({{diretorio_maven}/mvn jetty:run}), isso vai subir a aplicação usando o jetty
 a url é http://localhost:8080/app/zup/index.xhtml
 ```
