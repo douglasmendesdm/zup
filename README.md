@@ -24,5 +24,6 @@ Em seguida iniciar o mongoDB
 O último passo é voltar a pasta zup_parente e excutar o seguinte comando maven ({{diretorio_maven}/mvn jetty:run}), isso vai subir a aplicação usando o jetty
 a url é http://localhost:8080/app/zup/index.xhtml 
 
-# Atenção >>>>>>>> como se trata de uma aplicação para fins de prova de conhecimento a aplicação funciona apenas na porta 8080
+[Atenção >>>>>>>> como se trata de uma aplicação para fins de prova de conhecimento a aplicação funciona apenas na porta 8080]
+
 ```
