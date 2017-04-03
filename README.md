@@ -2,6 +2,7 @@
 
 Cadastro de Produtos Java - 
 Para executar o programa é preciso ter instalado o MongoDB, é preciso também do maven para fazer o build do projeto, o servidor usado é jetty!
+A aplicação usa Spring, MongoDB, Hinernate e JPA
 
 ### Instalação
 
