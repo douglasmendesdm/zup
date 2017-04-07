@@ -2,7 +2,7 @@
 
 Cadastro de Produtos Java - 
 Para executar o programa é preciso ter instalado o MongoDB, é preciso também do maven para fazer o build do projeto, o servidor usado é jetty!
-A aplicação usa Spring, MongoDB, Hinernate e JPA
+A aplicação usa Spring, MongoDB, bootstrap
 
 ### Instalação
 
@@ -22,8 +22,8 @@ git clone https://github.com/douglasmendesdm/zup.git
 ```shell
 Após baixar o projeto, abrir a pasta onde está o arquivo e fazer o build usando o maven ({diretorio_maven}/mvn install).
 Em seguida iniciar o mongoDB
-O último passo é voltar a pasta zup_parente e excutar o seguinte comando maven ({{diretorio_maven}/mvn jetty:run}), isso vai subir a aplicação usando o jetty
-a url é http://localhost:8080/app/zup/index.xhtml 
+O último passo é voltar a pasta zup e excutar o seguinte comando maven ({{diretorio_maven}/mvn jetty:run}), isso vai subir a aplicação usando o jetty
+a url é http://localhost:8080/zup 
 
 ### Atenção >>>>>>>> como se trata de uma aplicação para fins de prova de conhecimento a aplicação funciona apenas na porta 8080
 
