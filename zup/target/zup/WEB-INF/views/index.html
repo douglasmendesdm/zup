@@ -1,0 +1,243 @@
+<!DOCTYPE>
+  <head>
+    <title>Zup</title>
+    <meta name="viewport" charset="utf-8" content="width=device-width, initial-scale=1.0">
+    <script src="bootstrap/js/jquery-1.10.2.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
+  </head>
+  
+	<body>
+
+	<div>
+	
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="container">
+				<button type="button" class="btn btn-default navbar-btn" onclick="abreTelaInserir()">Inserir</button>
+			</div>
+		</nav>
+		
+		<div class="container">
+		  <h2>-</h2>
+		  <h1>Lista de produtos cadastrados</h1> 
+		  <div class="alert alert-success" id="gravado_sucesso" style="display:none;">
+		    <strong>Successo! </strong>
+		    Product gravado com sucesso.
+		</div>   
+		  <table data-toggle="table" class="table table-striped" id="produtos">
+		    <thead>
+		        <tr>
+		            <th data-field="Id">index</th>
+		            <th data-field="Name">name</th>
+		            <th data-field="Description">description</th>
+		            <th data-field="Price">price</th>
+		            <th data-field="Category">category</th>
+		            <th data-field="Action">action</th>
+		        </tr>
+		    </thead>
+			</table>
+		</div>
+		
+		<div class="modal fade" id="edicaoProduto" role="dialog">
+		    <div class="modal-dialog">
+		    
+		      <div class="modal-content">
+		        <div class="modal-header">
+		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		          <h4 class="modal-title">Editar Produto</h4>
+		        </div>
+		        <div class="modal-body">  
+		        	<h4>Id</h4>
+					<input type="text" class="form-control disabled" id="id" disabled="disabled"/>
+					<h4>Name</h4>
+					<input type="text" class="form-control" id="name"/>
+					<h4>Description</h4>
+					<input type="text" class="form-control" id="description"/>
+					<h4>Price</h4>
+					<input type="text" class="form-control" id="price"/>
+					<h4>Category</h4>
+					<input type="text" class="form-control" id="category"/>
+		        </div>
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-default" data-dismiss="modal" onclick="edita()">Update</button>
+		        </div>
+		      </div>
+		      
+		    </div>
+	  	</div>
+	  	
+	  	<div class="modal fade" id="recuperaProduto" role="dialog">
+		    <div class="modal-dialog">
+		    
+		      <div class="modal-content">
+		        <div class="modal-header">
+		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		          <h4 class="modal-title">Consulta Produto</h4>
+		        </div>
+		        <div class="modal-body">  
+		        	<h4>Id</h4>
+					<input type="text" class="form-control disabled" id="idProduct" disabled="disabled"/>
+					<h4>Name</h4>
+					<input type="text" class="form-control" id="nameProduct" disabled="disabled"/>
+					<h4>Description</h4>
+					<input type="text" class="form-control" id="descriptionProduct" disabled="disabled"/>
+					<h4>Price</h4>
+					<input type="text" class="form-control" id="priceProduct" disabled="disabled"/>
+					<h4>Category</h4>
+					<input type="text" class="form-control" id="categoryProduct" disabled="disabled"/>
+		        </div>
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+		        </div>
+		      </div>
+		      
+		    </div>
+	  	</div>
+	  	
+		  	<div class="modal fade" id="insereProduto" role="dialog">
+			    <div class="modal-dialog">
+			    
+			      <div class="modal-content">
+			        <div class="modal-header">
+			          <button type="button" class="close" data-dismiss="modal">&times;</button>
+			          <h4 class="modal-title">Inserir Produto - informe todos os campos</h4>
+			        </div>
+			        <div class="modal-body"> 
+			        
+						<h4>Name</h4>
+						<input type="text" class="form-control" id="nameNewProduct" placeholder="Digite um nome"/>
+						<h4>Description</h4>
+						<input type="text" class="form-control" id="descriptionNewProduct" placeholder="Digite uma description"/>
+						<h4>Price</h4>
+						<input type="text" class="form-control" id="priceNewProduct" placeholder="Digite um valor (apenas numeros)" onkeyup="somenteNumeros(this);"/>
+						<h4>Category</h4>
+						<input type="text" class="form-control" id="categoryNewProduct" placeholder="Digite uma categoria"/>
+			        </div>
+			        <div class="modal-footer">
+			          <button type="button" class="btn btn-default" data-dismiss="modal" onclick="inserir()">Inserir</button>
+			        </div>
+			      </div>
+			      
+			    </div>
+		  	</div>
+		
+	</div>
+
+<script>
+  //<![CDATA[
+  	
+    $(document).ready(function(){
+
+  		carregaListaProdutos();
+  		
+	 });         
+             
+  	function carregaListaProdutos(){
+	  	$.ajax({
+			   url: 'http://localhost:8080/zup/listaprodutos',
+			   dataType: 'json',
+			   success: function(data, teste, teste1) {
+			   		for (var i = 0; i < data.length ; i++) {
+		                 tr = $('<tr/>');
+		                 tr.append("<td>" + data[i].id + "</td>");
+		                 tr.append("<td style='cursor: pointer;'>" + data[i].name + "</td>");
+		                 tr.append("<td style='cursor: pointer;'>" + data[i].description + "</td>");
+		                 tr.append("<td style='cursor: pointer;'>" + data[i].price + "</td>");
+		                 tr.append("<td style='cursor: pointer;'>" + data[i].category + "</td>");
+		                 tr.append("<td><button type='button' class='btn btn-info' onclick='abreEdicao(\""+data[i].id+"\", \""+data[i].name+"\", \""+data[i].description+"\", \""+data[i].price+"\", \""+data[i].category+"\")'>Editar</button>"+
+		                		 "  <button type='button' class='btn btn-success' onclick='recuperar(\""+data[i].id+"\")'>Recuperar</button>"+
+		                		 "  <button type='button' class='btn btn-danger' onclick='excluir(\""+data[i].id+"\")'>Excluir</button></td>");
+		                 $('#produtos').append(tr);
+		             }
+			   }
+			});
+  	}
+  	
+  	function excluir(id){
+  		var urlDelete = 'http://localhost:8080/zup/delete/'+id;
+  		$.ajax({url: urlDelete, 
+  			    type: 'DELETE', 
+  			    success: function(result){
+  					window.location.replace("http://localhost:8080/zup");
+  					alert("Produto ecluido com sucesso");
+  	    		}, error: function(error){
+  	    			alert("Erro ao inserir produto");
+  	    		}
+  	    });  		
+  	}
+  	
+  	function abreEdicao(id, name, description, price, category){
+  		$("#id").val(id);
+  		$("#name").val(name);
+  		$("#description").val(description);
+  		$("#price").val(price);
+  		$("#category").val(category);
+  		$("#edicaoProduto").modal();
+  	}
+  	
+  	function edita(){
+  		var urlEdita = 'http://localhost:8080/zup/edita?id='+$('#id').val()+'&name='+$('#name').val()+'&description='+$('#description').val()+'&price='+$('#price').val()+'&category='+$('#category').val();
+		$.ajax({url: urlEdita, type: 'PUT', success: function(result){
+  			window.location.replace("http://localhost:8080/zup");
+  			alert("Atualizado com sucesso");
+  	    }});  
+  	}
+  	
+  	function recuperar(id){
+  		var urlrecupera = 'http://localhost:8080/zup/recupera/'+id;
+		$.ajax({
+		   url: urlrecupera,
+		   dataType: 'json',
+		   type: 'GET',
+		   success: function(data) {
+			   	$("#idProduct").val(data.id);
+		  		$("#nameProduct").val(data.name);
+		  		$("#descriptionProduct").val(data.description);
+		  		$("#priceProduct").val(data.price);
+		  		$("#categoryProduct").val(data.category);
+		  		$("#recuperaProduto").modal();
+		   },
+		 });
+		
+  	}
+  	
+  	function inserir(){
+  		
+  		var urlInsere = 'http://localhost:8080/zup/insere?name='+$('#nameNewProduct').val()+'&description='+$('#descriptionNewProduct').val()+'&price='+$('#priceNewProduct').val()+'&category='+$('#categoryNewProduct').val();
+		$.ajax({
+		   url: urlInsere,
+		   type: 'POST',
+		   success: function(data) {
+			   window.location.replace("http://localhost:8080/zup");
+			   alert("Produto gravado com sucesso");
+		   },
+		   error: function(error) {
+	            alert('Erro ao inserir');
+	       }
+		 });
+		
+  	}
+  	
+  	function somenteNumeros(num) {
+        var er = /[^0-9.]/;
+        er.lastIndex = 0;
+        var campo = num;
+        if (er.test(campo.value)) {
+          campo.value = "";
+        }
+    }
+  
+  	function abreTelaInserir(){
+  		
+  		$("#insereProduto").modal();
+  		
+  	}
+  	
+  	
+  //]]> 
+    </script>
+
+	</body>
+
+</html>

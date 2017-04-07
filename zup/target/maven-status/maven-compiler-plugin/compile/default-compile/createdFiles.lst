@@ -1,0 +1,8 @@
+br\com\zup\config\ServletSpringMVC.class
+br\com\zup\entity\Product.class
+br\com\zup\persistence\ProductDAO.class
+br\com\zup\config\MongoConfiguration.class
+br\com\zup\controllers\ProductController.class
+br\com\zup\model\ProductRepository.class
+br\com\zup\config\AppWebConfiguration.class
+br\com\zup\controllers\ZupController.class
